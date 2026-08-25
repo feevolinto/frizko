@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Supplier View - Frizko</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-primary-container": "#82b0e7",
+                "secondary-fixed-dim": "#86d2e4",
+                "primary-container": "#004373",
+                "surface-container-lowest": "#ffffff",
+                "on-surface-variant": "#42474f",
+                "on-error-container": "#93000a",
+                "surface-dim": "#c2def3",
+                "on-background": "#001e2e",
+                "surface-container": "#dff0ff",
+                "primary-fixed": "#d1e4ff",
+                "on-secondary-fixed": "#001f25",
+                "error": "#ba1a1a",
+                "primary": "#002c4f",
+                "secondary": "#006878",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#83b0ed",
+                "background": "#f6faff",
+                "surface": "#f6faff",
+                "tertiary": "#002c53",
+                "on-primary-fixed-variant": "#0d4979",
+                "on-primary": "#ffffff",
+                "on-surface": "#001e2e",
+                "on-secondary-container": "#0c6c7c",
+                "surface-container-low": "#eaf5ff",
+                "tertiary-fixed": "#d3e3ff",
+                "secondary-container": "#9febfe",
+                "warning-amber": "#f59e0b",
+                "on-tertiary-fixed": "#001c39",
+                "surface-bright": "#f6faff",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed-variant": "#0d487f",
+                "inverse-on-surface": "#e5f2ff",
+                "on-tertiary": "#ffffff",
+                "safe-green": "#22c55e",
+                "surface-variant": "#cbe6fc",
+                "outline-variant": "#c2c7d0",
+                "on-secondary-fixed-variant": "#004e5b",
+                "tertiary-container": "#004279",
+                "ice-bright": "#0db8d3",
+                "inverse-surface": "#183344",
+                "surface-container-highest": "#cbe6fc",
+                "on-error": "#ffffff",
+                "on-primary-fixed": "#001d36",
+                "outline": "#727780",
+                "inverse-primary": "#9ecaff",
+                "tertiary-fixed-dim": "#a3c9ff",
+                "surface-container-high": "#d3ebff",
+                "primary-fixed-dim": "#9ecaff",
+                "surface-tint": "#2f6193",
+                "secondary-fixed": "#a6eeff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "16px",
+                "lg": "24px",
+                "margin-desktop": "40px",
+                "sm": "12px",
+                "xl": "32px",
+                "margin-mobile": "16px",
+                "xs": "4px",
+                "md": "16px",
+                "base": "8px"
+        },
+        "fontFamily": {
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "title-md": [
+                        "Poppins"
+                ],
+                "display-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-sm": [
+                        "Poppins"
+                ],
+                "body-lg": [
+                        "Poppins"
+                ],
+                "body-md": [
+                        "Poppins"
+                ]
+        },
+        "fontSize": {
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "title-md": [
+                        "18px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body { font-family: 'Poppins', sans-serif; background-color: #F8FAFC; color: #001e2e; }
+        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background min-h-screen relative pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-14 bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(25,53,70,0.05)]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim icon-fill">ac_unit</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-secondary dark:text-secondary-fixed-dim">Frizko</span>
+</div>
+<div class="text-secondary dark:text-secondary-fixed-dim font-body-md text-body-md font-semibold">
+            Supplier View
+        </div>
+</header>
+<main class="pt-20 px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto space-y-lg">
+<!-- Latest Request Header -->
+<section class="space-y-2">
+<h1 class="font-title-md text-title-md text-on-surface">Latest Request</h1>
+<div class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface-variant font-body-md text-body-md font-mono flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5" style="font-size: 20px;">sms</span>
+<p>"STORE GENSAN 500KG AVAIL"</p>
+</div>
+</section>
+<!-- Parsed Request Card -->
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_20px_rgba(25,53,70,0.05)] border border-surface-container/50 space-y-md">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Yellowfin Tuna</h2>
+<p class="font-body-md text-body-md text-outline">General Santos City</p>
+</div>
+<div class="bg-[#FFF8E1] text-[#F57F17] px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 14px;">pending</span>
+                    Pending
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface rounded-lg p-sm border border-surface-variant">
+<span class="font-label-sm text-label-sm text-outline block mb-1">Weight</span>
+<span class="font-title-md text-title-md text-secondary">500 kg</span>
+</div>
+<div class="bg-surface rounded-lg p-sm border border-surface-variant">
+<span class="font-label-sm text-label-sm text-outline block mb-1">Type</span>
+<span class="font-title-md text-title-md text-secondary">Storage</span>
+</div>
+</div>
+<!-- Vertical Stepper -->
+<div class="mt-lg pt-md border-t border-surface-variant">
+<h3 class="font-label-sm text-label-sm text-outline mb-md uppercase tracking-wider">Status</h3>
+<div class="relative pl-6 space-y-6">
+<!-- Line connecting steps -->
+<div class="absolute left-[11px] top-2 bottom-2 w-[2px] bg-surface-variant"></div>
+<!-- Step 1: Completed -->
+<div class="relative">
+<div class="absolute -left-6 bg-secondary text-on-secondary rounded-full w-6 h-6 flex items-center justify-center z-10 border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined icon-fill" style="font-size: 14px;">check</span>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface leading-6">Request Received</p>
+<p class="font-label-sm text-label-sm text-outline">System parsed SMS</p>
+</div>
+<!-- Step 2: Active -->
+<div class="relative">
+<div class="absolute -left-6 bg-surface-container-lowest border-2 border-secondary rounded-full w-6 h-6 flex items-center justify-center z-10">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+</div>
+<p class="font-body-md text-body-md font-semibold text-secondary leading-6">Finding Storage</p>
+<p class="font-label-sm text-label-sm text-outline">Matching with nearby facilities</p>
+</div>
+<!-- Step 3: Pending -->
+<div class="relative opacity-50">
+<div class="absolute -left-6 bg-surface-container-lowest border-2 border-outline-variant rounded-full w-6 h-6 z-10"></div>
+<p class="font-body-md text-body-md text-on-surface leading-6">Stored</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-3 pt-md">
+<button class="flex-1 bg-secondary text-on-secondary font-title-md text-title-md h-12 rounded-lg flex items-center justify-center transition hover:opacity-90">
+                    View Nearby Facilities
+                </button>
+<button class="w-full sm:w-auto px-6 py-3 bg-surface-container-lowest text-secondary border border-secondary font-title-md text-title-md rounded-lg flex items-center justify-center transition hover:bg-surface-container-low">
+                    Cancel Request
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-surface-container-lowest dark:bg-surface-container-high shadow-[0px_-4px_20px_rgba(25,53,70,0.05)] rounded-t-xl md:hidden">
+<!-- Active Tab: Home (Assuming Home for default Supplier View dashboard) -->
+<a class="flex flex-col items-center justify-center bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary dark:text-secondary-fixed rounded-full px-4 py-1 transition-all scale-95" href="#">
+<span class="material-symbols-outlined icon-fill">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm mt-1">Logistics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-sm text-label-sm mt-1">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

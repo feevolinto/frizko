@@ -1,0 +1,288 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Frizko - Cold Storage Finder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e6e9ea",
+                        "tertiary-fixed-dim": "#4bd7f3",
+                        "surface": "#F2F9FA",
+                        "tertiary": "#004e5b",
+                        "surface-dim": "#d8dadb",
+                        "error": "#BA1A1A",
+                        "success": "#22C55E",
+                        "on-tertiary-container": "#7ee7ff",
+                        "secondary-fixed-dim": "#9ecaff",
+                        "surface-container-low": "#f1f4f5",
+                        "on-secondary-fixed": "#001d36",
+                        "outline-variant": "#bec8cb",
+                        "primary-fixed": "#a6eeff",
+                        "outline": "#6f797b",
+                        "on-tertiary-fixed-variant": "#004e5b",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#006878",
+                        "warning": "#F59E0B",
+                        "on-primary-fixed-variant": "#004e5b",
+                        "on-background": "#181c1d",
+                        "primary-fixed-dim": "#86d2e4",
+                        "secondary-container": "#99c7ff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#86d2e4",
+                        "surface-bright": "#f7fafb",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e0e3e4",
+                        "surface-container": "#eceeef",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#006878",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#98e4f7",
+                        "primary": "#004e5b",
+                        "on-tertiary-fixed": "#001f25",
+                        "surface-variant": "#e0e3e4",
+                        "on-secondary-container": "#1d5384",
+                        "on-primary-fixed": "#001f25",
+                        "on-surface": "#181c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#0d4979",
+                        "inverse-on-surface": "#eef1f2",
+                        "secondary-fixed": "#d1e4ff",
+                        "tertiary-container": "#006878",
+                        "inverse-surface": "#2d3132",
+                        "background": "#f7fafb",
+                        "tertiary-fixed": "#a7eeff",
+                        "secondary": "#2f6193",
+                        "on-surface-variant": "#3f484b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Poppins"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Poppins"],
+                        "title-md": ["Poppins"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Poppins"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body-md pb-24 md:pb-0 pt-20">
+<!-- Top App Bar (Web & Mobile Hybrid) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(25,53,70,0.05)] h-20"><div class="flex flex-col items-center justify-center w-full h-full py-2">
+  <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-[24px]" style="font-variation-settings: 'FILL' 1;">ac_unit</span>
+  <h1 class="font-headline-lg-mobile text-[16px] leading-tight font-bold text-primary dark:text-primary-fixed-dim">Frizko</h1>
+</div></header>
+<main class="w-full max-w-7xl mx-auto md:px-margin-desktop md:flex md:gap-gutter mt-6">
+<!-- Desktop Side Nav (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col w-60 h-[calc(100vh-80px)] sticky top-20 bg-secondary rounded-xl p-4 text-on-secondary shrink-0">
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-on-primary font-semibold transition-all shadow-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="">Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-secondary hover:bg-white/10 transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="">Logistics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-secondary hover:bg-white/10 transition-all" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="">Market</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-secondary hover:bg-white/10 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="">Profile</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 w-full flex flex-col gap-8 px-margin-mobile md:px-0">
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center mt-4 md:mt-10">
+
+<h2 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-2 font-bold">Store, match, and&nbsp;<div class="">sell your catch.</div></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-md mx-auto">Find a cold storage near you.</p>
+<!-- Search / Conversational Input -->
+<div class="w-full max-w-2xl relative">
+<div class="glass-panel rounded-2xl p-4 shadow-[0px_4px_24px_rgba(0,104,120,0.08)] flex flex-col gap-4">
+<div class="flex items-center bg-surface-container-lowest rounded-xl border border-outline-variant/30 px-4 py-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all"><span class="material-symbols-outlined text-primary mr-3">smart_toy</span><input class="w-full bg-transparent border-none focus:ring-0 text-body-md text-on-surface placeholder:text-outline-variant outline-none" placeholder="Yellowfin tuna 500kg" type="text"><button class="ml-2 px-4 py-1.5 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-tertiary transition-colors whitespace-nowrap">Chat Now</button></div>
+<!-- Quick Filters -->
+<div class="flex overflow-x-auto hide-scrollbar gap-3 pb-1">
+
+<button class="flex items-center gap-2 whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[16px] text-tertiary">severe_cold</span> Deep Freeze
+                            </button>
+
+</div>
+</div>
+</div>
+
+<p class="mt-4 font-label-sm text-label-sm text-outline">Powered by Frizko AI</p>
+</section>
+<!-- Storage Facilities Grid -->
+<section class="mt-8">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h3 class="font-title-md text-title-md text-primary">Available Facilities</h3>
+<p class="font-body-md text-body-md text-outline-variant">Based on your current location</p>
+</div>
+<a class="text-tertiary font-label-sm text-label-sm flex items-center gap-1 hover:underline" href="#">See all <span class="material-symbols-outlined text-[16px]">chevron_right</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(0,104,120,0.08)] flex flex-col border border-outline-variant/20 hover:shadow-[0px_8px_24px_rgba(0,104,120,0.12)] transition-shadow">
+<div class="h-40 relative bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A modern industrial cold storage warehouse facility from the exterior. Shot during golden hour with a bright, clean aesthetic. The building features sleek metal cladding in whites and light grays, with subtle teal branding accents. Loading docks are visible, and the scene implies efficiency and modern logistics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcrDLuyCGeNaCsWrU21WJSuRHbAmr0uS19-SBy-LnBFhNxfc45v0HC1uUmuiEnQLcw1YTx0RAurz-kpf5I6S-Bgk8ktKoqu_gVDDmwxN96-7aXTpP8DGR1T6AuagbgsT20YluZs_vsFV7AQ36Ho9lTbuCKy1FWayGeLZWQaZz8_7EkX_UQW63WtBioP5CtypCx5IxgCCHL2a2DpqJCJ9sA70VzXtMjTclqGll9pPqf9_LQdVgm5vNS">
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-warning" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.8</span>
+</div>
+<button class="absolute top-3 right-3 p-1.5 bg-surface-container-lowest/80 backdrop-blur-sm rounded-full text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h4 class="font-title-md text-title-md text-primary mb-1">Polaris Gateway Logistics</h4>
+<div class="flex items-center gap-1 text-outline-variant mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-body-md text-[12px]">2.4 mi • Port District</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-4">
+<div class="bg-surface p-2 rounded-lg border border-outline-variant/30 flex flex-col">
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Temp Range</span>
+<span class="font-body-md text-[13px] text-on-surface font-semibold">-20°C to 4°C</span>
+</div>
+<div class="bg-surface p-2 rounded-lg border border-outline-variant/30 flex flex-col">
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Available Cap</span>
+<span class="font-body-md text-[13px] text-on-surface font-semibold">1,200 Pallets</span>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div>
+<span class="font-label-sm text-[10px] text-outline">Starting at</span>
+<p class="font-title-md text-title-md text-primary">$45<span class="font-body-md text-[12px] text-outline-variant font-normal">/pallet/mo</span></p>
+</div>
+<button class="bg-tertiary-container text-on-tertiary font-label-sm px-4 py-2 rounded-lg hover:bg-tertiary transition-colors">
+                                    Book Now
+                                </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(0,104,120,0.08)] flex flex-col border border-outline-variant/20 hover:shadow-[0px_8px_24px_rgba(0,104,120,0.12)] transition-shadow">
+<div class="h-40 relative bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="Interior view of a massive, immaculately clean cold storage facility. High racking systems reach the ceiling, loaded with neatly wrapped pallets. Bright, cool-toned LED lighting illuminates the space, creating a professional, pristine atmosphere. A forklift is partially visible in the background, out of focus. Color palette emphasizes whites, cool grays, and teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYpYZN6OTkTVXFkO1Qz-Ar-6sV4UOa6_9amldVfMPGtdi2wXjOP-nh8potJwNOgu2bgc3D55TP_hTQSXfvA_F-8h9I5pVVPekUC5ysecCqGoSdKqfgkW88k_L2TkAsHMR-PJRHmfhNtP4hI9LLmgdthTF36usrYYtdMtY3p_tSgqkwt4EM4SGJVW1xfaIJDkKYx8rB9aQJBbTmzMquPv33pWKN92tkKU-TGPWBBR6exZm-PerTzxjr">
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-warning" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.5</span>
+</div>
+<button class="absolute top-3 right-3 p-1.5 bg-surface-container-lowest/80 backdrop-blur-sm rounded-full text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h4 class="font-title-md text-title-md text-primary mb-1">Apex Cold Chain Hub</h4>
+<div class="flex items-center gap-1 text-outline-variant mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-body-md text-[12px]">5.1 mi • Industrial Park</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-4">
+<div class="bg-surface p-2 rounded-lg border border-outline-variant/30 flex flex-col">
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Temp Range</span>
+<span class="font-body-md text-[13px] text-on-surface font-semibold">2°C to 8°C</span>
+</div>
+<div class="bg-surface p-2 rounded-lg border border-outline-variant/30 flex flex-col">
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Available Cap</span>
+<span class="font-body-md text-[13px] text-on-surface font-semibold">450 Pallets</span>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div>
+<span class="font-label-sm text-[10px] text-outline">Starting at</span>
+<p class="font-title-md text-title-md text-primary">$38<span class="font-body-md text-[12px] text-outline-variant font-normal">/pallet/mo</span></p>
+</div>
+<button class="bg-tertiary-container text-on-tertiary font-label-sm px-4 py-2 rounded-lg hover:bg-tertiary transition-colors">
+                                    Book Now
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-surface-container-lowest dark:bg-surface-container-high shadow-[0px_-4px_20px_rgba(25,53,70,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm mt-1">Logistics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-sm text-label-sm mt-1">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+
+
+</body></html>

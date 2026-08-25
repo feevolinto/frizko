@@ -1,0 +1,52 @@
+import type { SupplierRequest } from "../types";
+
+export const supplierRequests: SupplierRequest[] = [
+  {
+    id: "req-1",
+    supplierName: "You",
+    species: "Yellowfin Tuna",
+    weightKg: 500,
+    location: "General Santos City",
+    status: "matched",
+    rawSms: "STORE GENSAN 500KG AVAIL",
+    createdAt: "2026-08-24T06:12:00+08:00",
+  },
+  {
+    id: "req-2",
+    supplierName: "You",
+    species: "Blue Marlin",
+    weightKg: 320,
+    location: "General Santos City",
+    status: "stored",
+    rawSms: "STORE GENSAN 320KG MARLIN",
+    createdAt: "2026-08-20T05:40:00+08:00",
+  },
+  {
+    id: "req-3",
+    supplierName: "You",
+    species: "Skipjack Tuna",
+    weightKg: 180,
+    location: "General Santos City",
+    status: "pending",
+    rawSms: "STORE GENSAN 180KG SKIPJACK",
+    createdAt: "2026-08-25T04:55:00+08:00",
+  },
+  {
+    id: "req-4",
+    supplierName: "Oceanic Catch Co.",
+    species: "Yellowfin Tuna",
+    weightKg: 4500,
+    location: "General Santos City",
+    status: "pending",
+    createdAt: "2026-08-25T03:10:00+08:00",
+  },
+  {
+    id: "req-5",
+    supplierName: "Northern Farms",
+    species: "Poultry",
+    weightKg: 8200,
+    location: "General Santos City",
+    status: "pending",
+    createdAt: "2026-08-25T02:05:00+08:00",
+  },
+];
