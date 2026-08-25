@@ -35,10 +35,28 @@ type ChatMessage =
 
 const NEAREST_NODES = storageNodes;
 const SUPPLIER_NAME = "Juan Dela Cruz";
-// Simulated voice transcription result — there's no real speech-to-text
-// wired up, so tapping the mic "hears" this canned phrase, matching the
-// rest of the chat's hard-coded-script approach.
+// Fallback transcription for platforms/browsers with no real speech
+// recognition available (native builds, Firefox, older Safari) — see
+// startListening below, which prefers the real Web Speech API when it
+// exists and only falls back to this canned phrase otherwise.
 const VOICE_PHRASE = "Yellowfin Tuna 500kg";
+
+const SPEECH_LANG: Record<ChatLanguage, string> = {
+  english: "en-US",
+  tagalog: "fil-PH",
+  // Cebuano/Bisaya has no standard browser speech-recognition locale;
+  // Filipino is the closest widely-supported option.
+  bisaya: "fil-PH",
+};
+
+// The Web Speech API only exists in some browsers (Chrome/Edge, partial
+// Safari) and only on web — react-native's TS libs don't declare `window`,
+// so this reaches it via `globalThis` to avoid needing the DOM lib.
+function getSpeechRecognitionCtor(): any {
+  if (Platform.OS !== "web") return null;
+  const g = globalThis as any;
+  return g.SpeechRecognition || g.webkitSpeechRecognition || null;
+}
 
 let uid = 0;
 const nextId = () => `msg-${++uid}`;
@@ -76,6 +94,7 @@ export function SupplierChatScreen({
   const [isListening, setIsListening] = useState(false);
   const scrollRef = useRef<ScrollView>(null);
   const micPulse = useRef(new Animated.Value(1)).current;
+  const micPulseLoop = useRef<Animated.CompositeAnimation | null>(null);
 
   const pushMessage = (msg: ChatMessage) => setMessages((prev) => [...prev, msg]);
 
@@ -127,21 +146,71 @@ export function SupplierChatScreen({
     });
   };
 
-  const startListening = () => {
-    if (!inputEnabled || isListening) return;
-    setIsListening(true);
-
+  const beginMicPulse = () => {
+    micPulse.setValue(1);
     const loop = Animated.loop(
       Animated.sequence([
         Animated.timing(micPulse, { toValue: 1.3, duration: 450, useNativeDriver: true }),
         Animated.timing(micPulse, { toValue: 1, duration: 450, useNativeDriver: true }),
       ])
     );
+    micPulseLoop.current = loop;
     loop.start();
+  };
 
+  const endMicPulse = () => {
+    micPulseLoop.current?.stop();
+    micPulseLoop.current = null;
+    micPulse.setValue(1);
+  };
+
+  const startListening = () => {
+    if (!inputEnabled || isListening) return;
+    setIsListening(true);
+    beginMicPulse();
+
+    const SpeechRecognitionCtor = getSpeechRecognitionCtor();
+
+    if (SpeechRecognitionCtor) {
+      const recognition = new SpeechRecognitionCtor();
+      recognition.lang = SPEECH_LANG[language];
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = (event: any) => {
+        const transcript: string = event?.results?.[0]?.[0]?.transcript ?? "";
+        endMicPulse();
+        setIsListening(false);
+        if (transcript.trim()) {
+          setInputValue(transcript);
+          setTimeout(() => handleSend(transcript), 300);
+        }
+      };
+      recognition.onerror = () => {
+        endMicPulse();
+        setIsListening(false);
+      };
+      recognition.onend = () => {
+        // onresult already handles the success path above; this also
+        // covers silence/no-speech/user-cancelled cases.
+        endMicPulse();
+        setIsListening(false);
+      };
+
+      try {
+        recognition.start();
+      } catch {
+        endMicPulse();
+        setIsListening(false);
+      }
+      return;
+    }
+
+    // No real speech recognition available on this platform/browser
+    // (native app, Firefox, unsupported Safari) — fall back to a canned
+    // transcription so voice input still demonstrates the flow everywhere.
     setTimeout(() => {
-      loop.stop();
-      micPulse.setValue(1);
+      endMicPulse();
       setIsListening(false);
       setInputValue(VOICE_PHRASE);
       setTimeout(() => handleSend(VOICE_PHRASE), 400);
