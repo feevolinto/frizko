@@ -11,7 +11,6 @@ const ICON_MAP: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   "intake-log": "inventory-2",
   orders: "inventory-2",
   market: "storefront",
-  matching: "hub",
   profile: "person",
 };
 

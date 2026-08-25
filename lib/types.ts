@@ -68,11 +68,6 @@ export interface InventoryItem {
   sellerId: string;
 }
 
-export interface MatchSuggestion {
-  request: SupplierRequest;
-  suggestedNode: StorageNode;
-}
-
 export interface BuyerOrder {
   id: string;
   itemId: string;
@@ -82,4 +77,4 @@ export interface BuyerOrder {
   createdAt: string;
 }
 
-export type FrizkoRole = "supplier" | "operator" | "buyer" | "ops";
+export type FrizkoRole = "supplier" | "operator" | "buyer";

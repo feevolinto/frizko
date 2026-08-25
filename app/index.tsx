@@ -9,7 +9,6 @@ const ROLES: { key: FrizkoRole; label: string; description: string; icon: keyof 
   { key: "supplier", label: "Supplier", description: "Consign your catch via SMS", icon: "sailing", path: "/supplier" },
   { key: "operator", label: "Storage Operator", description: "Manage facility intake", icon: "warehouse", path: "/operator" },
   { key: "buyer", label: "Buyer", description: "Browse consignable inventory", icon: "storefront", path: "/buyer" },
-  { key: "ops", label: "Ops", description: "Match supply to storage", icon: "hub", path: "/ops/matching" },
 ];
 
 export default function Onboarding() {
