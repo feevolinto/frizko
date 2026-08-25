@@ -80,12 +80,10 @@ export function SupplierHomeScreen() {
                 style={[typography.bodyMd, styles.searchPlaceholder]}
                 cursorColor={colors.outline}
               />
-              <ChatNowButton onPress={openChat} />
             </Pressable>
 
-            <View style={styles.locationChip}>
-              <MaterialIcons name="location-on" size={16} color={colors.secondary} />
-              <Text style={[typography.labelSm, styles.locationChipText]}>Current Location · General Santos City</Text>
+            <View style={styles.chatNowRow}>
+              <ChatNowButton onPress={openChat} />
             </View>
           </View>
 
@@ -221,7 +219,7 @@ const styles = StyleSheet.create({
   searchCard: {
     width: "100%",
     backgroundColor: "rgba(255,255,255,0.85)",
-    borderRadius: radius.lg + 8,
+    borderRadius: radius.xl + 8,
     padding: spacing.md,
     gap: spacing.md,
     ...shadow.cardLifted,
@@ -233,19 +231,20 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceContainerLowest,
     borderWidth: 1,
     borderColor: colors.outlineVariant,
-    borderRadius: radius.md,
+    borderRadius: radius.xl,
     paddingHorizontal: spacing.md,
     height: 52,
   },
   searchPlaceholder: { flex: 1, color: colors.outline },
+  chatNowRow: { alignItems: "center" },
   chatNowButton: {
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
     backgroundColor: colors.primary,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 9,
-    borderRadius: radius.DEFAULT,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: 12,
+    borderRadius: radius.full,
     shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.35,
@@ -264,19 +263,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   chatNowLabel: { color: colors.onPrimary, fontWeight: "700" },
-  locationChip: {
-    flexDirection: "row",
-    alignSelf: "flex-start",
-    alignItems: "center",
-    gap: spacing.xs,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 8,
-    borderRadius: radius.full,
-    borderWidth: 1,
-    borderColor: colors.outlineVariant,
-    backgroundColor: colors.surfaceContainerLowest,
-  },
-  locationChipText: { color: colors.onSurfaceVariant, fontWeight: "600" },
   poweredBy: { color: colors.outline, marginTop: spacing.md, letterSpacing: 0.5 },
   facilitiesSection: { paddingHorizontal: spacing.marginMobile, marginTop: spacing.xl, gap: spacing.md },
   facilitiesHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
