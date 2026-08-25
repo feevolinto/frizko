@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  Animated,
   View,
   Text,
   TextInput,
@@ -34,6 +35,10 @@ type ChatMessage =
 
 const NEAREST_NODES = storageNodes;
 const SUPPLIER_NAME = "Juan Dela Cruz";
+// Simulated voice transcription result — there's no real speech-to-text
+// wired up, so tapping the mic "hears" this canned phrase, matching the
+// rest of the chat's hard-coded-script approach.
+const VOICE_PHRASE = "Yellowfin Tuna 500kg";
 
 let uid = 0;
 const nextId = () => `msg-${++uid}`;
@@ -68,7 +73,9 @@ export function SupplierChatScreen({
   const [inputEnabled, setInputEnabled] = useState(false);
   const [openTicket, setOpenTicket] = useState<{ node: StorageNode; species: string; weightKg: number; reference: string; issuedAt: Date } | null>(null);
   const [lastCatch, setLastCatch] = useState<{ species: string; weightKg: number }>({ species: t.fallbackSpecies, weightKg: 500 });
+  const [isListening, setIsListening] = useState(false);
   const scrollRef = useRef<ScrollView>(null);
+  const micPulse = useRef(new Animated.Value(1)).current;
 
   const pushMessage = (msg: ChatMessage) => setMessages((prev) => [...prev, msg]);
 
@@ -92,8 +99,8 @@ export function SupplierChatScreen({
     scrollRef.current?.scrollToEnd({ animated: true });
   }, [messages, isTyping]);
 
-  const handleSend = () => {
-    const raw = inputValue.trim();
+  const handleSend = (overrideText?: string) => {
+    const raw = (overrideText ?? inputValue).trim();
     if (!raw) return;
 
     pushMessage({ id: nextId(), from: "user", kind: "text", text: raw });
@@ -118,6 +125,27 @@ export function SupplierChatScreen({
         pushMessage({ id: nextId(), from: "ai", kind: "storageOptions", options: NEAREST_NODES });
       });
     });
+  };
+
+  const startListening = () => {
+    if (!inputEnabled || isListening) return;
+    setIsListening(true);
+
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(micPulse, { toValue: 1.3, duration: 450, useNativeDriver: true }),
+        Animated.timing(micPulse, { toValue: 1, duration: 450, useNativeDriver: true }),
+      ])
+    );
+    loop.start();
+
+    setTimeout(() => {
+      loop.stop();
+      micPulse.setValue(1);
+      setIsListening(false);
+      setInputValue(VOICE_PHRASE);
+      setTimeout(() => handleSend(VOICE_PHRASE), 400);
+    }, 1500);
   };
 
   const handleSelectStorage = (msgId: string, node: StorageNode, species: string, weightKg: number) => {
@@ -222,11 +250,20 @@ export function SupplierChatScreen({
             placeholder={inputEnabled ? t.inputPlaceholder : t.waitingPlaceholder}
             placeholderTextColor={colors.outline}
             style={[styles.input, !inputEnabled && styles.inputDisabled]}
-            onSubmitEditing={handleSend}
+            onSubmitEditing={() => handleSend()}
             returnKeyType="send"
           />
           <Pressable
-            onPress={handleSend}
+            onPress={startListening}
+            disabled={!inputEnabled || isListening}
+            style={[styles.micButton, isListening && styles.micButtonActive, !inputEnabled && styles.micButtonDisabled]}
+          >
+            <Animated.View style={{ transform: [{ scale: micPulse }] }}>
+              <MaterialIcons name="mic" size={20} color={isListening ? colors.onError : colors.secondary} />
+            </Animated.View>
+          </Pressable>
+          <Pressable
+            onPress={() => handleSend()}
             disabled={!inputEnabled || !inputValue.trim()}
             style={[styles.sendButton, (!inputEnabled || !inputValue.trim()) && styles.sendButtonDisabled]}
           >
@@ -446,6 +483,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   inputDisabled: { opacity: 0.6 },
+  micButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.surfaceContainerLow,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  micButtonActive: { backgroundColor: colors.error },
+  micButtonDisabled: { opacity: 0.4 },
   sendButton: {
     width: 44,
     height: 44,

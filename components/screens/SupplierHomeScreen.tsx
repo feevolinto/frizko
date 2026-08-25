@@ -84,6 +84,7 @@ export function SupplierHomeScreen() {
 
             <View style={styles.chatNowRow}>
               <ChatNowButton onPress={openChat} />
+              <MicButton onPress={openChat} />
             </View>
           </View>
 
@@ -141,6 +142,21 @@ function ChatNowButton({ onPress }: { onPress: () => void }) {
     >
       <MaterialIcons name="chat-bubble" size={13} color={colors.onPrimary} />
       <Text style={[typography.labelSm, styles.chatNowLabel]}>Chat Now</Text>
+    </Pressable>
+  );
+}
+
+function MicButton({ onPress }: { onPress: () => void }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Pressable
+      onPress={onPress}
+      onHoverIn={() => setHovered(true)}
+      onHoverOut={() => setHovered(false)}
+      style={({ pressed }) => [styles.micButton, hovered && styles.micButtonHovered, pressed && styles.micButtonPressed]}
+    >
+      <MaterialIcons name="mic" size={20} color={colors.primary} />
     </Pressable>
   );
 }
@@ -236,7 +252,7 @@ const styles = StyleSheet.create({
     height: 52,
   },
   searchPlaceholder: { flex: 1, color: colors.outline },
-  chatNowRow: { alignItems: "center" },
+  chatNowRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm },
   chatNowButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -263,6 +279,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   chatNowLabel: { color: colors.onPrimary, fontWeight: "700" },
+  micButton: {
+    width: 48,
+    height: 48,
+    borderRadius: radius.full,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.surfaceContainerLowest,
+    borderWidth: 1,
+    borderColor: colors.outlineVariant,
+    ...shadow.card,
+  },
+  micButtonHovered: { backgroundColor: colors.surfaceContainerLow, transform: [{ translateY: -1 }] },
+  micButtonPressed: { opacity: 0.85, transform: [{ scale: 0.96 }] },
   poweredBy: { color: colors.outline, marginTop: spacing.md, letterSpacing: 0.5 },
   facilitiesSection: { paddingHorizontal: spacing.marginMobile, marginTop: spacing.xl, gap: spacing.md },
   facilitiesHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
